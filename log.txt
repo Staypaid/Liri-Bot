@@ -9,3 +9,24 @@ User Command: node liri.js spotify-this-song
 
 -- do-what-it-says
 -- do-what-it-says
+-- spotify-this-song purple rain
+User Command: node liri.js spotify-this-songpurple rain
+
+-- spotify-this-song bicycle
+User Command: node liri.js spotify-this-songbicycle
+
+-- spotify-this-song bicycle
+User Command: node liri.js spotify-this-songbicycle
+
+-- movie-this us
+-- concert-this Drake
+-- do-what-it-says
+-- spotify-this-song bicycleclear
+User Command: node liri.js spotify-this-songbicycleclear
+
+-- movie-this ace ventura
+-- spotify-this-song waterfalls
+User Command: node liri.js spotify-this-songwaterfalls
+
+-- concert-this schoolboy q
+-- do-what-it-says

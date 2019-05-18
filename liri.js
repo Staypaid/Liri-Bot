@@ -95,6 +95,16 @@ function  searchWhatever(){
 function searchSongs(){
     var song = info
 
+    // fs.appendFile('./log.txt', 'User Command: node liri.js spotify-this-song' + song + '\n\n', (err) => {
+    //   if(err) throw err;
+    // });
+    // var search;
+    // if(song === ''){
+    //   search = 'The Sign Of Ace';
+    // } else {
+    //   search = song;
+    // }
+
 
     spotify.search({ type: 'track', query: search}, function(err, data) {
       if (err) {

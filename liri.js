@@ -15,6 +15,14 @@ var Spotify = require('node-spotify-api');
 var input = process.argv;
 console.log(input);
 
+// write input on the log.txt file
+var infoLog = "-- " + input.slice(2).join(" ") + "\n"
+
+console.log(infoLog)
+fs.appendFile("log.txt", infoLog, 'utf8', function(error){
+  return;
+})
+
 //displays input and controls spacing
 var operation = input[2];
 var info = input.slice(3).join(" ");
@@ -26,21 +34,21 @@ console.log(info);
 
 switch(operation) {
 
-    case "concert":
+    case "concert-this":
 
             searchConcerts()
       // code block
       break;
 
-    case "songs":
+    case "spotify-this-song":
     searchSongs()
       break;
 
-      case "movies":
+      case "movie-this":
    searchMovies()
       break;
 
-      case "whatever":
+      case "do-what-it-says":
       searchWhatever()
       break;
     
@@ -81,29 +89,55 @@ switch(operation) {
 
   function searchMovies(){
 
-// imdb
+    var movies = info
+    var queryURL = "http://www.omdbapi.com/?t=" + movies + "&apikey=trilogy"
+   
+    axios.get(queryURL)
+        .then(function(res){
+          console.log(res.data.Title)
+          console.log(res.data.Year)
+          console.log(res.data.imdbRating)
+          console.log(res.data.Ratings[1].Value)
+          console.log(res.data.Country)
+          console.log(res.data.Language)
+          console.log(res.data.Plot)
+          console.log(res.data.Actors)
 
+
+
+        })
+  
   }
+  // Title of the movie.
+  // * Year the movie came out.
+  // * IMDB Rating of the movie.
+  // * Rotten Tomatoes Rating of the movie.
+  // * Country where the movie was produced.
+  // * Language of the movie.
+  // * Plot of the movie.
+  // * Actors in the movie.
 
 
 function  searchWhatever(){
 
-
-
+  fs.readFile("random.txt",'utf8', function(error, data){
+    console.log(data)
+  
+  })
 
 }
 function searchSongs(){
     var song = info
 
-    // fs.appendFile('./log.txt', 'User Command: node liri.js spotify-this-song' + song + '\n\n', (err) => {
-    //   if(err) throw err;
-    // });
-    // var search;
-    // if(song === ''){
-    //   search = 'The Sign Of Ace';
-    // } else {
-    //   search = song;
-    // }
+    fs.appendFile('./log.txt', 'User Command: node liri.js spotify-this-song' + song + '\n\n', (err) => {
+      if(err) throw err;
+    });
+    var search;
+    if(song === ''){
+      search = 'The Sign Ace of Base';
+    } else {
+      search = song;
+    }
 
 
     spotify.search({ type: 'track', query: search}, function(err, data) {
@@ -120,7 +154,11 @@ function searchSongs(){
        // console.log(data.tracks.items[i])
        console.log("--------------")
        console.log(data.tracks.items[i].name)
-       console.log(data.tracks.items[i].album.artists)
+       var artistsNames = []
+       for (var j=0; j < data.tracks.items[i].album.artists.length; j++){
+         artistsNames.push(data.tracks.items[i].album.artists[j].name)
+       } 
+       console.log(artistsNames.join(","))
        console.log(data.tracks.items[i].album.name)
        console.log(data.tracks.items[i].preview_url)
     }

@@ -1,0 +1,11 @@
+
+-- movie-this avengers
+-- movie-this titanic
+-- whatever
+-- concert-this ariana grande
+-- concert-this ariana grande
+-- spotify-this-song
+User Command: node liri.js spotify-this-song
+
+-- do-what-it-says
+-- do-what-it-says
